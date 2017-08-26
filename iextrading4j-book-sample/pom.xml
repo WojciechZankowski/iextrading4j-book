@@ -11,5 +11,38 @@
 
     <artifactId>iextrading4j-book-sample</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>pl.zankowski</groupId>
+            <artifactId>iextrading4j-book-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.pcap4j</groupId>
+            <artifactId>pcap4j-core</artifactId>
+            <version>1.7.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.pcap4j</groupId>
+            <artifactId>pcap4j-packetfactory-static</artifactId>
+            <version>1.7.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <repositories>
+        <repository>
+            <id>clojars</id>
+            <url>http://clojars.org/repo/</url>
+        </repository>
+    </repositories>
 
 </project>

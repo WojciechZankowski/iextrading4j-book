@@ -27,6 +27,18 @@
                 <artifactId>iextrading4j-hist-api</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
+
+            <dependency>
+                <groupId>pl.zankowski</groupId>
+                <artifactId>iextrading4j-hist-deep</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>pl.zankowski</groupId>
+                <artifactId>iextrading4j-book-core</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
