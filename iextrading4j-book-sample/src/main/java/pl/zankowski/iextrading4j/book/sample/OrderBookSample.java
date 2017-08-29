@@ -29,9 +29,9 @@ public class OrderBookSample {
     private void readDEEPSample() throws PcapNativeException, NotOpenException, InterruptedException {
         PcapHandle handle;
         try {
-            handle = Pcaps.openOffline("F:\\IEXTrading\\20170823_IEXTP1_DEEP1.0.pcap", PcapHandle.TimestampPrecision.NANO);
+            handle = Pcaps.openOffline("F:\\IEXTrading\\20170825_IEXTP1_DEEP1.0.pcap", PcapHandle.TimestampPrecision.NANO);
         } catch (PcapNativeException e) {
-            handle = Pcaps.openOffline("F:\\IEXTrading\\20170823_IEXTP1_DEEP1.0.pcap");
+            handle = Pcaps.openOffline("F:\\IEXTrading\\20170825_IEXTP1_DEEP1.0.pcap");
         }
 
         handle.loop(-1, new PacketListener() {
@@ -46,7 +46,7 @@ public class OrderBookSample {
                                 .orElseGet(() -> new IEXOrderBook(iexPriceLevelUpdateMessage.getSymbol()));
                         iexOrderBook.priceLevelUpdate(iexPriceLevelUpdateMessage);
                         orderBookStore.updateOrderBook(iexOrderBook);
-                        if (iexOrderBook.getSymbol().equals("AAPL")) {
+                        if (iexOrderBook.getSymbol().equals("IBM")) {
                             System.out.println(iexOrderBook);
                         }
                     }
