@@ -12,6 +12,14 @@ IEX Trading open source incremental Order Book implementation
 
 Java SE 8 is required to use IEXTrading4j Book library.
 
+```
+<dependency>
+	<groupId>pl.zankowski</groupId>
+	<artifactId>iextrading4j-book-core</artifactId>
+	<version>1.0.0</version>
+</dependency>
+```
+
 Library is up to:
 
 * DEEP version 1.04 - August 1, 2017
