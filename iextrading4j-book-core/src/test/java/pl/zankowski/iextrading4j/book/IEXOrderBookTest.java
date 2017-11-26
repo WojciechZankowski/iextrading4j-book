@@ -1,6 +1,7 @@
 package pl.zankowski.iextrading4j.book;
 
 import org.junit.Test;
+import pl.zankowski.iextrading4j.book.api.PriceLevel;
 import pl.zankowski.iextrading4j.hist.api.IEXMessageType;
 import pl.zankowski.iextrading4j.hist.api.field.IEXPrice;
 import pl.zankowski.iextrading4j.hist.deep.trading.field.IEXEventFlag;
@@ -12,9 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static pl.zankowski.iextrading4j.book.builder.IEXPriceLevelUpdateMessageDataBuilder.anIEXPriceLevelUpdateMessage;
 import static pl.zankowski.iextrading4j.book.builder.IEXPriceLevelUpdateMessageDataBuilder.defaultIEXPriceLevelUpdateMessage;
 
-/**
- * @author Wojciech Zankowski
- */
 public class IEXOrderBookTest {
 
     private final String TEST_SYMBOL = "AAPL";
@@ -78,7 +76,8 @@ public class IEXOrderBookTest {
                 .withIEXMessageType(IEXMessageType.PRICE_LEVEL_UPDATE_SELL).withIEXPrice(new IEXPrice(17534L))
                 .withIEXEventFlag(IEXEventFlag.ORDER_BOOK_IS_PROCESSING_EVENT).build();
         final IEXPriceLevelUpdateMessage iexPriceLevelUpdateMessage_2 = anIEXPriceLevelUpdateMessage()
-                .withIEXMessageType(IEXMessageType.PRICE_LEVEL_UPDATE_SELL).build();;
+                .withIEXMessageType(IEXMessageType.PRICE_LEVEL_UPDATE_SELL).build();
+        ;
         final IEXOrderBook orderBook = new IEXOrderBook(TEST_SYMBOL);
 
         orderBook.priceLevelUpdate(iexPriceLevelUpdateMessage_1);

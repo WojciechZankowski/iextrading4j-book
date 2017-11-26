@@ -1,10 +1,7 @@
-package pl.zankowski.iextrading4j.book;
+package pl.zankowski.iextrading4j.book.api;
 
 import java.util.List;
 
-/**
- * @author Wojciech Zankowski
- */
 public interface OrderBook {
 
     String getSymbol();

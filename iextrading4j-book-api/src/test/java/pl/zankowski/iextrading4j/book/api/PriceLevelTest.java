@@ -1,15 +1,11 @@
-package pl.zankowski.iextrading4j.book;
+package pl.zankowski.iextrading4j.book.api;
 
 import org.junit.Test;
 import pl.zankowski.iextrading4j.hist.api.field.IEXPrice;
-import pl.zankowski.iextrading4j.hist.api.message.IEXMessageHeader;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static pl.zankowski.iextrading4j.book.builder.PriceLevelDataBuilder.defaultPriceLevel;
+import static pl.zankowski.iextrading4j.book.api.PriceLevelDataBuilder.defaultPriceLevel;
 
-/**
- * @author Wojciech Zankowski
- */
 public class PriceLevelTest {
 
     @Test

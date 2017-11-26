@@ -1,5 +1,7 @@
 package pl.zankowski.iextrading4j.book;
 
+import pl.zankowski.iextrading4j.book.api.OrderBook;
+import pl.zankowski.iextrading4j.book.api.PriceLevel;
 import pl.zankowski.iextrading4j.hist.api.field.IEXPrice;
 import pl.zankowski.iextrading4j.hist.deep.trading.field.IEXEventFlag;
 import pl.zankowski.iextrading4j.hist.deep.trading.message.IEXPriceLevelUpdateMessage;
@@ -12,25 +14,22 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
 
-/**
- * @author Wojciech Zankowski
- */
 public class IEXOrderBook implements OrderBook {
 
     private final String symbol;
-    private final Map<IEXPrice, PriceLevel> bidOffers;
-    private final Map<IEXPrice, PriceLevel> askOffers;
+    private final TreeMap<IEXPrice, PriceLevel> bidOffers;
+    private final TreeMap<IEXPrice, PriceLevel> askOffers;
 
-    private Queue<PriceLevel> bidQueue = new LinkedList<>();
-    private Queue<PriceLevel> askQueue = new LinkedList<>();
+    private final Queue<PriceLevel> bidQueue = new LinkedList<>();
+    private final Queue<PriceLevel> askQueue = new LinkedList<>();
 
-    public IEXOrderBook(String symbol) {
+    public IEXOrderBook(final String symbol) {
         this.symbol = symbol;
         this.bidOffers = new TreeMap<>(Comparator.reverseOrder());
         this.askOffers = new TreeMap<>();
     }
 
-    public void priceLevelUpdate(IEXPriceLevelUpdateMessage iexPriceLevelUpdateMessage) {
+    public void priceLevelUpdate(final IEXPriceLevelUpdateMessage iexPriceLevelUpdateMessage) {
         switch (iexPriceLevelUpdateMessage.getIexMessageType()) {
             case PRICE_LEVEL_UPDATE_SELL:
                 priceLevelUpdate(iexPriceLevelUpdateMessage, askQueue, askOffers);
@@ -43,7 +42,9 @@ public class IEXOrderBook implements OrderBook {
         }
     }
 
-    private void priceLevelUpdate(IEXPriceLevelUpdateMessage iexPriceLevelUpdateMessage, Queue<PriceLevel> priceLevelQueue, Map<IEXPrice, PriceLevel> offers) {
+    private void priceLevelUpdate(final IEXPriceLevelUpdateMessage iexPriceLevelUpdateMessage,
+            final Queue<PriceLevel> priceLevelQueue, final Map<IEXPrice, PriceLevel> offers) {
+
         if (iexPriceLevelUpdateMessage.getIexEventFlag() == IEXEventFlag.EVENT_PROCESSING_COMPLETE) {
             drainPriceLevelQueue(priceLevelQueue, offers);
             processPriceLevelToOffers(convertToPriceLevel(iexPriceLevelUpdateMessage), offers);
@@ -54,14 +55,14 @@ public class IEXOrderBook implements OrderBook {
         }
     }
 
-    private void drainPriceLevelQueue(Queue<PriceLevel> priceLevelQueue, Map<IEXPrice, PriceLevel> offers) {
+    private void drainPriceLevelQueue(final Queue<PriceLevel> priceLevelQueue, final Map<IEXPrice, PriceLevel> offers) {
         while (!priceLevelQueue.isEmpty()) {
             PriceLevel priceLevel = priceLevelQueue.poll();
             processPriceLevelToOffers(priceLevel, offers);
         }
     }
 
-    private void processPriceLevelToOffers(PriceLevel priceLevel, Map<IEXPrice, PriceLevel> offers) {
+    private void processPriceLevelToOffers(final PriceLevel priceLevel, final Map<IEXPrice, PriceLevel> offers) {
         if (priceLevel.getSize() == 0) {
             offers.remove(priceLevel.getPrice());
         } else {
@@ -69,11 +70,12 @@ public class IEXOrderBook implements OrderBook {
         }
     }
 
-    private void addEventToQueue(IEXPriceLevelUpdateMessage iexPriceLevelUpdateMessage, Queue<PriceLevel> priceLevelQueue) {
+    private void addEventToQueue(final IEXPriceLevelUpdateMessage iexPriceLevelUpdateMessage,
+            final Queue<PriceLevel> priceLevelQueue) {
         priceLevelQueue.add(convertToPriceLevel(iexPriceLevelUpdateMessage));
     }
 
-    private PriceLevel convertToPriceLevel(IEXPriceLevelUpdateMessage iexPriceLevelUpdateMessage) {
+    private PriceLevel convertToPriceLevel(final IEXPriceLevelUpdateMessage iexPriceLevelUpdateMessage) {
         return new PriceLevel(iexPriceLevelUpdateMessage.getSymbol(),
                 iexPriceLevelUpdateMessage.getTimestamp(),
                 iexPriceLevelUpdateMessage.getIexPrice(),
@@ -97,12 +99,12 @@ public class IEXOrderBook implements OrderBook {
 
     @Override
     public PriceLevel getBestAskOffer() {
-        return ((TreeMap<IEXPrice, PriceLevel>) askOffers).firstEntry().getValue();
+        return askOffers.firstEntry().getValue();
     }
 
     @Override
     public PriceLevel getBestBidOffer() {
-        return ((TreeMap<IEXPrice, PriceLevel>) bidOffers).firstEntry().getValue();
+        return bidOffers.firstEntry().getValue();
     }
 
     @Override

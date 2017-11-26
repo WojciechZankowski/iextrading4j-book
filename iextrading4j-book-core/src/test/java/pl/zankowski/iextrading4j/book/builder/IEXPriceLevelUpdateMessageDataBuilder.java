@@ -5,9 +5,6 @@ import pl.zankowski.iextrading4j.hist.api.field.IEXPrice;
 import pl.zankowski.iextrading4j.hist.deep.trading.field.IEXEventFlag;
 import pl.zankowski.iextrading4j.hist.deep.trading.message.IEXPriceLevelUpdateMessage;
 
-/**
- * @author Wojciech Zankowski
- */
 public class IEXPriceLevelUpdateMessageDataBuilder {
 
     private IEXMessageType iexMessageType = IEXMessageType.PRICE_LEVEL_UPDATE_BUY;

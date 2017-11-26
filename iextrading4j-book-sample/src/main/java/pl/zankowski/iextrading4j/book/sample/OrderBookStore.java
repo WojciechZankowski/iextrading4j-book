@@ -6,9 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * @author Wojciech Zankowski
- */
 public class OrderBookStore {
 
     private final Map<String, IEXOrderBook> orderBookMap = new HashMap<>();

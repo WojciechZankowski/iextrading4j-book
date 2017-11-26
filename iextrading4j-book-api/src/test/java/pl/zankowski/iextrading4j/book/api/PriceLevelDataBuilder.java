@@ -1,11 +1,7 @@
-package pl.zankowski.iextrading4j.book.builder;
+package pl.zankowski.iextrading4j.book.api;
 
-import pl.zankowski.iextrading4j.book.PriceLevel;
 import pl.zankowski.iextrading4j.hist.api.field.IEXPrice;
 
-/**
- * @author Wojciech Zankowski
- */
 public class PriceLevelDataBuilder {
 
     private String symbol = "IBM";
