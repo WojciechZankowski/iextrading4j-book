@@ -1,5 +1,9 @@
 # IEXTrading4j Book
 
+[![Build Status](https://travis-ci.org/WojciechZankowski/iextrading4j-book.svg?branch=master)](https://travis-ci.org/WojciechZankowski/iextrading4j-book)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/pl.zankowski/iextrading4j-book-core/badge.svg)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22pl.zankowski%22%20AND%20a%3A%22iextrading4j-book-core%22)
+
+
 IEX Trading open source incremental Order Book implementation
 
 * [Quick Start](#quick-start)
@@ -11,6 +15,14 @@ IEX Trading open source incremental Order Book implementation
 ## Quick Start
 
 Java SE 8 is required to use IEXTrading4j Book library.
+
+```
+<dependency>
+	<groupId>pl.zankowski</groupId>
+	<artifactId>iextrading4j-book-core</artifactId>
+	<version>1.0.0</version>
+</dependency>
+```
 
 Library is up to:
 
