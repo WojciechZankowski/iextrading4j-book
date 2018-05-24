@@ -24,10 +24,10 @@ public class IEXOrderBookTest {
 
         orderBook.priceLevelUpdate(iexPriceLevelUpdateMessage);
 
-        List<PriceLevel> bidPriceLevels = orderBook.getBidLevels();
+        final List<PriceLevel> bidPriceLevels = orderBook.getBidLevels();
         assertThat(bidPriceLevels).hasSize(1);
 
-        PriceLevel priceLevel = bidPriceLevels.get(0);
+        final PriceLevel priceLevel = bidPriceLevels.get(0);
         assertThat(priceLevel.getTimestamp()).isEqualTo(iexPriceLevelUpdateMessage.getTimestamp());
         assertThat(priceLevel.getSize()).isEqualTo(iexPriceLevelUpdateMessage.getSize());
         assertThat(priceLevel.getPrice()).isEqualTo(iexPriceLevelUpdateMessage.getIexPrice());
@@ -42,10 +42,10 @@ public class IEXOrderBookTest {
 
         orderBook.priceLevelUpdate(iexPriceLevelUpdateMessage);
 
-        List<PriceLevel> askPriceLevels = orderBook.getAskLevels();
+        final List<PriceLevel> askPriceLevels = orderBook.getAskLevels();
         assertThat(askPriceLevels).hasSize(1);
 
-        PriceLevel priceLevel = askPriceLevels.get(0);
+        final PriceLevel priceLevel = askPriceLevels.get(0);
         assertThat(priceLevel.getTimestamp()).isEqualTo(iexPriceLevelUpdateMessage.getTimestamp());
         assertThat(priceLevel.getSize()).isEqualTo(iexPriceLevelUpdateMessage.getSize());
         assertThat(priceLevel.getPrice()).isEqualTo(iexPriceLevelUpdateMessage.getIexPrice());
@@ -65,7 +65,7 @@ public class IEXOrderBookTest {
         orderBook.priceLevelUpdate(iexPriceLevelUpdateMessage_2);
         assertThat(orderBook.getBidLevels()).hasSize(2);
 
-        List<PriceLevel> bidPriceLevels = orderBook.getBidLevels();
+        final List<PriceLevel> bidPriceLevels = orderBook.getBidLevels();
         assertThat(bidPriceLevels.get(0).getPrice()).isEqualTo(iexPriceLevelUpdateMessage_1.getIexPrice());
         assertThat(bidPriceLevels.get(1).getPrice()).isEqualTo(iexPriceLevelUpdateMessage_2.getIexPrice());
     }
@@ -77,7 +77,6 @@ public class IEXOrderBookTest {
                 .withIEXEventFlag(IEXEventFlag.ORDER_BOOK_IS_PROCESSING_EVENT).build();
         final IEXPriceLevelUpdateMessage iexPriceLevelUpdateMessage_2 = anIEXPriceLevelUpdateMessage()
                 .withIEXMessageType(IEXMessageType.PRICE_LEVEL_UPDATE_SELL).build();
-        ;
         final IEXOrderBook orderBook = new IEXOrderBook(TEST_SYMBOL);
 
         orderBook.priceLevelUpdate(iexPriceLevelUpdateMessage_1);
@@ -86,7 +85,7 @@ public class IEXOrderBookTest {
         orderBook.priceLevelUpdate(iexPriceLevelUpdateMessage_2);
         assertThat(orderBook.getAskLevels()).hasSize(2);
 
-        List<PriceLevel> askPriceLevels = orderBook.getAskLevels();
+        final List<PriceLevel> askPriceLevels = orderBook.getAskLevels();
         assertThat(askPriceLevels.get(0).getPrice()).isEqualTo(iexPriceLevelUpdateMessage_2.getIexPrice());
         assertThat(askPriceLevels.get(1).getPrice()).isEqualTo(iexPriceLevelUpdateMessage_1.getIexPrice());
     }
@@ -145,6 +144,55 @@ public class IEXOrderBookTest {
 
         orderBook.priceLevelUpdate(iexPriceLevelUpdateMessage_2);
         assertThat(orderBook.getAskLevels()).isEmpty();
+    }
+
+    @Test
+    public void shouldSuccessfullyReturnBestAsk() {
+        final IEXPriceLevelUpdateMessage iexPriceLevelUpdateMessage = anIEXPriceLevelUpdateMessage()
+                .withIEXMessageType(IEXMessageType.PRICE_LEVEL_UPDATE_SELL).build();
+        final IEXOrderBook orderBook = new IEXOrderBook(TEST_SYMBOL);
+
+        orderBook.priceLevelUpdate(iexPriceLevelUpdateMessage);
+
+        final PriceLevel priceLevel = orderBook.getBestAskOffer();
+        assertThat(priceLevel.getTimestamp()).isEqualTo(iexPriceLevelUpdateMessage.getTimestamp());
+        assertThat(priceLevel.getSize()).isEqualTo(iexPriceLevelUpdateMessage.getSize());
+        assertThat(priceLevel.getPrice()).isEqualTo(iexPriceLevelUpdateMessage.getIexPrice());
+        assertThat(orderBook.getBidLevels()).isEmpty();
+    }
+
+    @Test
+    public void shouldSuccessfullyReturnBestBid() {
+        final IEXPriceLevelUpdateMessage iexPriceLevelUpdateMessage = defaultIEXPriceLevelUpdateMessage();
+        final IEXOrderBook orderBook = new IEXOrderBook(TEST_SYMBOL);
+
+        orderBook.priceLevelUpdate(iexPriceLevelUpdateMessage);
+
+        final PriceLevel priceLevel = orderBook.getBestBidOffer();
+        assertThat(priceLevel.getTimestamp()).isEqualTo(iexPriceLevelUpdateMessage.getTimestamp());
+        assertThat(priceLevel.getSize()).isEqualTo(iexPriceLevelUpdateMessage.getSize());
+        assertThat(priceLevel.getPrice()).isEqualTo(iexPriceLevelUpdateMessage.getIexPrice());
+        assertThat(orderBook.getAskLevels()).isEmpty();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionForUnknownMessageType() {
+        final IEXPriceLevelUpdateMessage iexPriceLevelUpdateMessage = anIEXPriceLevelUpdateMessage()
+                .withIEXMessageType(IEXMessageType.OPERATIONAL_HALT_STATUS)
+                .build();
+        final IEXOrderBook orderBook = new IEXOrderBook(TEST_SYMBOL);
+
+        orderBook.priceLevelUpdate(iexPriceLevelUpdateMessage);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowAnExceptionForUnknownEventFlag() {
+        final IEXPriceLevelUpdateMessage iexPriceLevelUpdateMessage = anIEXPriceLevelUpdateMessage()
+                .withIEXEventFlag(null)
+                .build();
+        final IEXOrderBook orderBook = new IEXOrderBook(TEST_SYMBOL);
+
+        orderBook.priceLevelUpdate(iexPriceLevelUpdateMessage);
     }
 
 }

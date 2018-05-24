@@ -22,32 +22,32 @@ public class IEXPriceLevelUpdateMessageDataBuilder {
         return new IEXPriceLevelUpdateMessageDataBuilder();
     }
 
-    public IEXPriceLevelUpdateMessageDataBuilder withIEXMessageType(IEXMessageType iexMessageType) {
+    public IEXPriceLevelUpdateMessageDataBuilder withIEXMessageType(final IEXMessageType iexMessageType) {
         this.iexMessageType = iexMessageType;
         return this;
     }
 
-    public IEXPriceLevelUpdateMessageDataBuilder withIEXEventFlag(IEXEventFlag iexEventFlag) {
+    public IEXPriceLevelUpdateMessageDataBuilder withIEXEventFlag(final IEXEventFlag iexEventFlag) {
         this.iexEventFlag = iexEventFlag;
         return this;
     }
 
-    public IEXPriceLevelUpdateMessageDataBuilder withTimestamp(long timestamp) {
+    public IEXPriceLevelUpdateMessageDataBuilder withTimestamp(final long timestamp) {
         this.timestamp = timestamp;
         return this;
     }
 
-    public IEXPriceLevelUpdateMessageDataBuilder withSize(int size) {
+    public IEXPriceLevelUpdateMessageDataBuilder withSize(final int size) {
         this.size = size;
         return this;
     }
 
-    public IEXPriceLevelUpdateMessageDataBuilder withSymbol(String symbol) {
+    public IEXPriceLevelUpdateMessageDataBuilder withSymbol(final String symbol) {
         this.symbol = symbol;
         return this;
     }
 
-    public IEXPriceLevelUpdateMessageDataBuilder withIEXPrice(IEXPrice iexPrice) {
+    public IEXPriceLevelUpdateMessageDataBuilder withIEXPrice(final IEXPrice iexPrice) {
         this.iexPrice = iexPrice;
         return this;
     }

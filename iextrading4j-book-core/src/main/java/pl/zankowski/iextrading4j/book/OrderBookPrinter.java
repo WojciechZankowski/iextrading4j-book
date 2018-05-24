@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class OrderBookPrinter {
+class OrderBookPrinter {
 
     private static final String BID_HEADER = "Bid";
     private static final String ASK_HEADER = "Ask";
 
-    public static String printBook(final OrderBook orderBook) {
+    static String printBook(final OrderBook orderBook) {
         final Iterator<PriceLevel> bidPriceLevels = orderBook.getBidLevels().iterator();
         final Iterator<PriceLevel> askPriceLevels = orderBook.getAskLevels().iterator();
         final List<String> bids = new ArrayList<>();
