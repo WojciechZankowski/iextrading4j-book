@@ -2,7 +2,7 @@ language: java
 sudo: false
 
 addons:
-  sonarcloud:
+  sonarqube:
     organization: "wojciechzankowski-github"
 
 jdk:
