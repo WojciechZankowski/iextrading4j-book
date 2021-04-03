@@ -1,6 +1,6 @@
 # IEXTrading4j Book
 
-[![Build Status](https://travis-ci.org/WojciechZankowski/iextrading4j-book.svg?branch=master)](https://travis-ci.org/WojciechZankowski/iextrading4j-book)
+[![Build Status](https://github.com/WojciechZankowski/iextrading4j-book/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/WojciechZankowski/iextrading4j-book/actions/workflows/main.yml?query=branch%3Amaster)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/pl.zankowski/iextrading4j-book-core/badge.svg)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22pl.zankowski%22%20AND%20a%3A%22iextrading4j-book-core%22)
 [![codecov](https://codecov.io/gh/WojciechZankowski/iextrading4j-book/branch/master/graph/badge.svg)](https://codecov.io/gh/WojciechZankowski/iextrading4j-book)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=pl.zankowski%3Aiextrading4j-book&metric=alert_status)](https://sonarcloud.io/dashboard/index/pl.zankowski:iextrading4j-book)
